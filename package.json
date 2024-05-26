@@ -6,22 +6,32 @@
   },
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w",
-    "test": "jest",
+    "build:vite": "rm -rf ./build; npx remix vite:build",
+    "start": "npx remix-serve build/server/index.js",
     "cdk": "cdk"
   },
   "devDependencies": {
+    "@remix-run/dev": "^2.9.2",
     "@types/jest": "^29.5.12",
     "@types/node": "20.12.7",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.1.2",
     "aws-cdk": "2.142.1",
+    "aws-cdk-lib": "^2.142.1",
+    "constructs": "^10.3.0",
+    "jest": "^29.7.0",
+    "source-map-support": "^0.5.21",
+    "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "~5.4.5"
+    "typescript": "~5.4.5",
+    "vite": "^5.2.11",
+    "vite-plugin-cjs-interop": "^2.1.0"
   },
   "dependencies": {
-    "aws-cdk-lib": "2.142.1",
-    "constructs": "^10.0.0",
-    "source-map-support": "^0.5.21"
+    "@remix-run/architect": "^2.9.2",
+    "@remix-run/node": "^2.9.2",
+    "@remix-run/react": "^2.9.2",
+    "@remix-run/serve": "^2.9.2",
+    "isbot": "^4.4.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }
