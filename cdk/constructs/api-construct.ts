@@ -1,7 +1,7 @@
 import { CfnOutput, Stack } from "aws-cdk-lib";
 import { Construct } from "constructs";
-import { StaticConstruct } from "./static-construct";
-import { LambdaConstruct } from "./lambda-construct";
+import { StaticConstruct } from "./static-construct.ts";
+import { LambdaConstruct } from "./lambda-construct.ts";
 import { HttpApi, HttpMethod } from "aws-cdk-lib/aws-apigatewayv2";
 import { HttpLambdaIntegration } from "aws-cdk-lib/aws-apigatewayv2-integrations";
 

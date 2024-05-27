@@ -12,7 +12,8 @@ import {
   CacheControl,
   Source,
 } from "aws-cdk-lib/aws-s3-deployment";
-import { LambdaConstruct } from "./lambda-construct";
+import { LambdaConstruct } from "./lambda-construct.ts";
+import * as glob from "glob";
 
 export class StaticConstruct extends Construct {
   private s3Bucket: Bucket;
@@ -49,6 +50,11 @@ export class StaticConstruct extends Construct {
       "BUCKET_NAME",
       this.s3Bucket.bucketName
     );
+    props.lambdaConstruct.lambda.addEnvironment(
+      "KNOWN_EXTENSIONS",
+      this.getKnownExtensions(__dirname + "/../../public/**/*")
+    );
+
     this.s3Bucket.grantRead(props.lambdaConstruct.lambda);
     this.s3Bucket.grantPut(props.lambdaConstruct.lambda);
     this.s3Bucket.grantWrite(props.lambdaConstruct.lambda);
@@ -58,6 +64,14 @@ export class StaticConstruct extends Construct {
       allowedOrigins: ["*"],
       allowedMethods: [HttpMethods.GET, HttpMethods.HEAD],
     });
+  }
+
+  private getKnownExtensions(path: string) {
+    const files = glob.globSync(path);
+    return files
+      .map((i: string) => i.split("/").pop()?.split(".").pop()?.trim())
+      .filter((i, id, arr) => i && arr.indexOf(i) === id)
+      .join(",");
   }
 
   public get bucket() {
