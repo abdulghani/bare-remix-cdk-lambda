@@ -1,5 +1,5 @@
 import { createRequestHandler } from "@remix-run/architect";
-import * as build from "../build/server/index.mjs";
+import * as build from "./build/server/index.mjs";
 
 const remixHandler = createRequestHandler({
   build,
@@ -11,6 +11,7 @@ export async function handler(...args: any) {
   event.requestContext.http = {
     method: event.httpMethod,
   };
+
   const result = await (remixHandler as any)(...args);
   return {
     statusCode: result.statusCode,

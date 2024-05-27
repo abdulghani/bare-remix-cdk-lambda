@@ -23,13 +23,13 @@
     "ts-node": "^10.9.2",
     "typescript": "~5.4.5",
     "vite": "^5.2.11",
-    "vite-plugin-cjs-interop": "^2.1.0"
+    "vite-plugin-cjs-interop": "^2.1.0",
+    "@remix-run/serve": "^2.9.2"
   },
   "dependencies": {
     "@remix-run/architect": "^2.9.2",
     "@remix-run/node": "^2.9.2",
     "@remix-run/react": "^2.9.2",
-    "@remix-run/serve": "^2.9.2",
     "isbot": "^4.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
