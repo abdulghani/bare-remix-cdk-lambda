@@ -4,6 +4,7 @@ export default function App() {
   return (
     <html>
       <head>
+        <title>Remix Starter</title>
         <link rel="icon" href="/public/favicon.ico" />
         <Meta />
         <Links />

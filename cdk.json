@@ -1,5 +1,5 @@
 {
-  "app": "npm run build:vite; rm -rf cdk.out/asset.*; npx ts-node --prefer-ts-exts bin/index.ts",
+  "app": "npm run build:vite; rm -rf cdk.out/asset.*; npx ts-node --prefer-ts-exts cdk/index.ts",
   "watch": {
     "include": ["**"],
     "exclude": [
