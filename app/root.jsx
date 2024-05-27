@@ -11,6 +11,7 @@ export default function App() {
       </head>
       <body>
         <h1>Hello world there!</h1>
+        <img src="/public/diagram.drawio.svg" />
         <Outlet />
 
         <Scripts />
