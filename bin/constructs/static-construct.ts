@@ -4,6 +4,7 @@ import {
   BlockPublicAccess,
   Bucket,
   BucketAccessControl,
+  HttpMethods,
   ObjectOwnership,
 } from "aws-cdk-lib/aws-s3";
 import {
@@ -55,10 +56,10 @@ export class StaticConstruct extends Construct {
       ],
     });
 
-    this.s3Bucket.grantRead(props.lambdaConstruct.lambda);
-    this.s3Bucket.grantReadWrite(props.lambdaConstruct.lambda);
-    this.s3Bucket.grantDelete(props.lambdaConstruct.lambda);
-    this.s3Bucket.grantPut(props.lambdaConstruct.lambda);
+    this.s3Bucket.addCorsRule({
+      allowedOrigins: ["*"],
+      allowedMethods: [HttpMethods.GET, HttpMethods.HEAD],
+    });
   }
 
   public get bucket() {
