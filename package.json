@@ -1,18 +1,20 @@
 {
   "name": "cdk-remix",
   "version": "0.1.0",
+  "type": "module",
   "bin": {
     "cdk-remix": "bin/cdk-remix.js"
   },
   "scripts": {
     "build": "rm -rf ./build; npx remix vite:build",
-    "start": "npx remix-serve build/server/index.js"
+    "start": "npx remix dev"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.9.2",
     "@remix-run/serve": "^2.9.2",
     "@types/jest": "^29.5.12",
     "@types/node": "20.12.7",
+    "@types/react": "^18.3.3",
     "aws-cdk": "2.142.1",
     "aws-cdk-lib": "^2.142.1",
     "constructs": "^10.3.0",
