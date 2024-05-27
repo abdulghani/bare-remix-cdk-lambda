@@ -26,12 +26,13 @@ export class CdkRemixStack extends Stack {
 
   constructor(scope: Construct, id: string, props?: any) {
     super(scope, id, props);
-    this.key = props.keyPrefix || "_static";
 
     const helloFunction = new NodejsFunction(this, "HelloFunction", {
       runtime: Runtime.NODEJS_20_X,
-      entry: __dirname + "/../handler.mts",
+      entry: __dirname + "/../handler.ts",
       bundling: {
+        minify: true,
+        keepNames: true,
         bundleAwsSDK: false,
         nodeModules: Object.keys(packageJSON.dependencies),
       },
@@ -50,7 +51,7 @@ export class CdkRemixStack extends Stack {
     new BucketDeployment(this, "Default", {
       sources: [Source.asset(__dirname + "/../public")],
       destinationBucket: bucket,
-      destinationKeyPrefix: "_static",
+      destinationKeyPrefix: "public",
       cacheControl: [
         CacheControl.maxAge(Duration.days(365)),
         CacheControl.sMaxAge(Duration.days(365)),
@@ -77,7 +78,7 @@ export class CdkRemixStack extends Stack {
     );
     const s3Integration = new HttpUrlIntegration(
       "S3Integration",
-      `https://${bucket.bucketName}.s3.amazonaws.com/_static/{proxy}`,
+      `https://${bucket.bucketName}.s3.amazonaws.com/public/{proxy}`,
       { method: HttpMethod.GET }
     );
     const s3Integration2 = new HttpUrlIntegration(
@@ -95,7 +96,7 @@ export class CdkRemixStack extends Stack {
       integration: integration,
     });
     httpApi.addRoutes({
-      path: "/_static/{proxy+}",
+      path: "/public/{proxy+}",
       methods: [HttpMethod.GET],
       integration: s3Integration,
     });

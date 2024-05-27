@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [
     remix({
       buildDirectory: "build",
-      serverBuildFile: "index.mjs",
+      serverBuildFile: "index.js",
       ssr: true,
     }),
   ],

@@ -1,5 +1,5 @@
 import { createRequestHandler } from "@remix-run/architect";
-import * as build from "./build/server/index.mjs";
+import * as build from "./build/server/index.js";
 
 const remixHandler = createRequestHandler({
   build,

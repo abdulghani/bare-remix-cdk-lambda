@@ -4,7 +4,7 @@ export default function App() {
   return (
     <html>
       <head>
-        <link rel="icon" href="/_static/favicon.ico" />
+        <link rel="icon" href="/public/favicon.ico" />
         <Meta />
         <Links />
       </head>
