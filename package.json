@@ -5,13 +5,12 @@
     "cdk-remix": "bin/cdk-remix.js"
   },
   "scripts": {
-    "build": "tsc",
-    "build:vite": "rm -rf ./build; npx remix vite:build",
-    "start": "npx remix-serve build/server/index.js",
-    "cdk": "cdk"
+    "build": "rm -rf ./build; npx remix vite:build",
+    "start": "npx remix-serve build/server/index.js"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.9.2",
+    "@remix-run/serve": "^2.9.2",
     "@types/jest": "^29.5.12",
     "@types/node": "20.12.7",
     "aws-cdk": "2.142.1",
@@ -23,8 +22,7 @@
     "ts-node": "^10.9.2",
     "typescript": "~5.4.5",
     "vite": "^5.2.11",
-    "vite-plugin-cjs-interop": "^2.1.0",
-    "@remix-run/serve": "^2.9.2"
+    "vite-plugin-cjs-interop": "^2.1.0"
   },
   "dependencies": {
     "@remix-run/architect": "^2.9.2",

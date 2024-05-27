@@ -36,25 +36,23 @@ export class StaticConstruct extends Construct {
       accessControl: BucketAccessControl.BUCKET_OWNER_FULL_CONTROL,
       publicReadAccess: true,
     });
-
-    new BucketDeployment(this, "public-files", {
-      sources: [Source.asset(__dirname + "/../../public")],
-      destinationBucket: this.s3Bucket,
-      destinationKeyPrefix: "public",
-      cacheControl: [
-        CacheControl.maxAge(Duration.days(365)),
-        CacheControl.sMaxAge(Duration.days(365)),
-      ],
-    });
     new BucketDeployment(this, "asset-files", {
-      sources: [Source.asset(__dirname + "/../../build/client/assets")],
+      sources: [Source.asset(__dirname + "/../../build/client")],
       destinationBucket: this.s3Bucket,
-      destinationKeyPrefix: "assets",
       cacheControl: [
         CacheControl.maxAge(Duration.days(365)),
         CacheControl.sMaxAge(Duration.days(365)),
       ],
     });
+
+    props.lambdaConstruct.lambda.addEnvironment(
+      "BUCKET_NAME",
+      this.s3Bucket.bucketName
+    );
+    this.s3Bucket.grantRead(props.lambdaConstruct.lambda);
+    this.s3Bucket.grantPut(props.lambdaConstruct.lambda);
+    this.s3Bucket.grantWrite(props.lambdaConstruct.lambda);
+    this.s3Bucket.grantDelete(props.lambdaConstruct.lambda);
 
     this.s3Bucket.addCorsRule({
       allowedOrigins: ["*"],

@@ -6,12 +6,22 @@ const remixHandler = createRequestHandler({
 });
 
 export async function handler(...args: any) {
-  /** FILL REQUEST PARAMETERS FOR HANDLER */
   const [event] = args;
-  event.rawQueryString = event.queryStringParameters || "";
-  event.requestContext.http = {
-    method: event.httpMethod,
-  };
+
+  /** REDIRECT ASSET/PUBLIC FILES */
+  if (
+    event.requestContext?.http?.method === "GET" &&
+    (event.pathParameters?.proxy?.startsWith("assets/") ||
+      (!event.pathParameters?.proxy?.includes("/") &&
+        event.pathParameters?.proxy?.includes(".")))
+  ) {
+    return {
+      statusCode: 307,
+      headers: {
+        Location: `https://${process.env.BUCKET_NAME}.s3.amazonaws.com/${event.pathParameters.proxy}`,
+      },
+    };
+  }
 
   /** INVOKE HANDLER */
   const result = await (remixHandler as any)(...args);

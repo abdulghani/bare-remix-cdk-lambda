@@ -3,10 +3,7 @@ import { Construct } from "constructs";
 import { StaticConstruct } from "./static-construct";
 import { LambdaConstruct } from "./lambda-construct";
 import { HttpApi, HttpMethod } from "aws-cdk-lib/aws-apigatewayv2";
-import {
-  HttpLambdaIntegration,
-  HttpUrlIntegration,
-} from "aws-cdk-lib/aws-apigatewayv2-integrations";
+import { HttpLambdaIntegration } from "aws-cdk-lib/aws-apigatewayv2-integrations";
 
 export class APIConstruct extends Construct {
   constructor(
@@ -31,26 +28,6 @@ export class APIConstruct extends Construct {
       path: "/{proxy+}",
       methods: [HttpMethod.ANY],
       integration: lambdaIntegration,
-    });
-    const s3IntegrationPublic = new HttpUrlIntegration(
-      "S3IntegrationPublic",
-      `https://${props.staticConstruct.bucket.bucketName}.s3.amazonaws.com/public/{proxy}`,
-      { method: HttpMethod.GET }
-    );
-    httpAPI.addRoutes({
-      path: "/public/{proxy+}",
-      methods: [HttpMethod.GET],
-      integration: s3IntegrationPublic,
-    });
-    const s3IntegrationAsset = new HttpUrlIntegration(
-      "S3IntegrationAsset",
-      `https://${props.staticConstruct.bucket.bucketName}.s3.amazonaws.com/assets/{proxy}`,
-      { method: HttpMethod.GET }
-    );
-    httpAPI.addRoutes({
-      path: "/assets/{proxy+}",
-      methods: [HttpMethod.GET],
-      integration: s3IntegrationAsset,
     });
 
     new CfnOutput(this, "ApiUrl", {

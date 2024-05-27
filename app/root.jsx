@@ -5,13 +5,13 @@ export default function App() {
     <html>
       <head>
         <title>Remix Starter</title>
-        <link rel="icon" href="/public/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
         <Meta />
         <Links />
       </head>
       <body>
         <h1>Hello world there!</h1>
-        <img src="/public/diagram.drawio.svg" />
+        <img src="/diagram.drawio.svg" />
         <Outlet />
 
         <Scripts />
