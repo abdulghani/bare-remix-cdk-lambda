@@ -24,6 +24,6 @@
     "strictPropertyInitialization": false,
     "esModuleInterop": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "cdk.out"]
+  "include": ["src/**/*", "cdk/**/*", "app/**/*"],
+  "exclude": ["node_modules", "cdk.out", "build", ".cache", "public/build"]
 }
