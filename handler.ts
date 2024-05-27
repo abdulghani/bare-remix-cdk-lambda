@@ -6,20 +6,22 @@ const remixHandler = createRequestHandler({
 });
 
 export async function handler(...args: any) {
+  /** FILL REQUEST PARAMETERS FOR HANDLER */
   const [event] = args;
   event.rawQueryString = event.queryStringParameters || "";
   event.requestContext.http = {
     method: event.httpMethod,
   };
 
+  /** INVOKE HANDLER */
   const result = await (remixHandler as any)(...args);
+
+  /** RESPONSE REMOVED COOKIES TO SET-COOKIE HEADER */
   return {
-    statusCode: result.statusCode,
-    headers: result.headers,
+    ...result,
+    cookies: undefined,
     multiValueHeaders: {
       "Set-Cookie": result.cookies || [],
     },
-    body: result.body,
-    isBase64Encoded: result.isBase64Encoded,
   };
 }
