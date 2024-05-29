@@ -3,6 +3,8 @@ import { Links, Meta, Outlet, Scripts } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 import stylesheet from "./style.css?url";
 import { Button } from "@/components/ui/button";
+import { CardDemo } from "@/components/custom/card-demo";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,6 +17,18 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command";
+
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
   { rel: "icon", href: "/favicon.ico" },
@@ -22,7 +36,7 @@ export const links: LinksFunction = () => [
 
 export default function App() {
   return (
-    <html>
+    <html className="dark">
       <head>
         <title>Remix Starter</title>
         <Meta />
@@ -31,9 +45,28 @@ export default function App() {
       <body>
         <h1 className="text-3xl font-bold">Hello world there!</h1>
         <img src="/diagram.drawio.svg" />
-        <Button>Click me</Button>
+
         <Outlet />
 
+        <Command>
+          <CommandInput placeholder="Type a command or search..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Suggestions">
+              <CommandItem>Calendar</CommandItem>
+              <CommandItem>Search Emoji</CommandItem>
+              <CommandItem>Calculator</CommandItem>
+            </CommandGroup>
+            <CommandSeparator />
+            <CommandGroup heading="Settings">
+              <CommandItem>Profile</CommandItem>
+              <CommandItem>Billing</CommandItem>
+              <CommandItem>Settings</CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </Command>
+
+        <CardDemo />
         <AlertDialog>
           <AlertDialogTrigger>Open</AlertDialogTrigger>
           <AlertDialogContent>
