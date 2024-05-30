@@ -53,7 +53,7 @@ export function Dashboard() {
       </div>
       <div className="hidden bg-muted lg:block">
         <img
-          src="/login-banner.jpg"
+          src="/login-banner.webp"
           alt="Image"
           width="1920"
           height="1080"
