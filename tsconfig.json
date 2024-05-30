@@ -25,9 +25,11 @@
     "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./@/*"]
+      "@/*": ["./@/*"],
+      "app/*": ["./app/*"],
+      "public/*": ["./public/*"]
     }
   },
-  "include": ["app/**/*"],
+  "include": ["app/**/*", "@/**/*", "cdk/**/*", "public/**/*"],
   "exclude": ["node_modules", "cdk.out", "build", ".cache", "public/build"]
 }
