@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Image } from "@/components/custom/image";
 
 export function Dashboard() {
   return (
@@ -52,12 +53,12 @@ export function Dashboard() {
         </div>
       </div>
       <div className="hidden bg-muted lg:block">
-        <img
+        <Image
           src="/login-banner.webp"
           alt="Image"
           width="1920"
           height="1080"
-          className="h-screen w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          className="h-screen w-full object-cover dark:brightness-[0.2] dark:grayscale bg-cover bg-center bg-no-repeat"
         />
       </div>
     </div>
